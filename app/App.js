@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 
 import {
-  Home
+  Home,
+  Sign
 } from './containers';
 
 const {
@@ -18,8 +19,8 @@ const {
 class App extends Component {
 
   static propTypes = {
-    drawerState: React.PropTypes.string,
     popRoute: React.PropTypes.func,
+    selectedProfile: React.PropTypes.object,
     navigation: React.PropTypes.shape({
       key: React.PropTypes.string,
       routes: React.PropTypes.array,
@@ -49,14 +50,16 @@ class App extends Component {
     switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashPage />;
+      case 'profile':
+        return <Profile {...this.props.selectedProfile} />
       default :
-        return <Home />;
+        return <Sign />;
     }
   }
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1}}>
         <StatusBar
           backgroundColor={'white'}
           barStyle="default"
@@ -79,6 +82,7 @@ function bindAction(dispatch) {
 
 const mapStateToProps = state => ({
   navigation: state.cardNavigation,
+  selectedProfile: state.feed.selectedProfile,
 });
 
 export default connect(mapStateToProps, bindAction)(App);

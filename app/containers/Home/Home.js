@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles';
 
 import { Profile } from '../../components';
+import { Feed } from '../';
 
 const {
   jumpTo
@@ -31,7 +32,7 @@ class Home extends Component {
           renderIcon={() => <Icon name='md-list' size={26} />}
           renderSelectedIcon={() => <Icon color="#F66E96" name='md-list' size={26} />}
           onPress={ () => jumpToTab(0, navigation.key) }>
-          <View style={{flex: 1, backgroundColor: 'green'}} />
+          <Feed />
         </Tab>
         <Tab
           selected={selectedTab === 'profile'}

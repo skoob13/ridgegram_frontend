@@ -1,4 +1,5 @@
 import { persistStore } from 'redux-persist';
+import ReduxThunk from 'redux-thunk'
 import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import devTools from 'remote-redux-devtools';
@@ -7,7 +8,7 @@ import promise from '../helpers/promise';
 
 export default function configureStore(onCompletion: () => void):any {
   const enhancer = compose(
-    applyMiddleware(promise),
+    applyMiddleware(ReduxThunk, promise),
     devTools({
       name: 'Ridgegram', realtime: true,
     }),
