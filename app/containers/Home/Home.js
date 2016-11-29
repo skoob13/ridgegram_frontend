@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { actions as navigationActions } from 'react-native-navigation-redux-helpers';
-import { Tabs, Tab, Icon } from 'react-native-elements'
+import { Tabs, Tab } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/Ionicons';
+import styles from './Styles';
+
+import { Profile } from '../../components';
 
 const {
   jumpTo
@@ -22,18 +26,22 @@ class Home extends Component {
         <Tab
           selected={selectedTab === 'feed'}
           title={'Feed'}
-          renderIcon={() => <Icon name='whatshot' size={26} />}
-          renderSelectedIcon={() => <Icon name='whatshot' size={26} />}
+          titleStyle={styles.titleStyle}
+          selectedTitleStyle={styles.titleStyle}
+          renderIcon={() => <Icon name='md-list' size={26} />}
+          renderSelectedIcon={() => <Icon color="#F66E96" name='md-list' size={26} />}
           onPress={ () => jumpToTab(0, navigation.key) }>
           <View style={{flex: 1, backgroundColor: 'green'}} />
         </Tab>
         <Tab
           selected={selectedTab === 'profile'}
           title={'Profile'}
-          renderIcon={() => <Icon name='whatshot' size={26} />}
-          renderSelectedIcon={() => <Icon name='whatshot' size={26} />}
+          titleStyle={styles.titleStyle}
+          selectedTitleStyle={styles.titleStyle}
+          renderIcon={() => <Icon name='md-person' size={26} />}
+          renderSelectedIcon={() => <Icon color="#F66E96" name='md-person' size={26} />}
           onPress={ () => jumpToTab(1, navigation.key) }>
-          <View style={{flex: 1, backgroundColor: 'red'}} />
+          <Profile avatar={{url: 'https://pp.vk.me/c631525/v631525614/2b398/kbI5QohgEgQ.jpg', description: 'Hey', likesCount: 25}} />
         </Tab>
       </Tabs>
     );

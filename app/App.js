@@ -3,11 +3,9 @@ import { View, BackAndroid, StatusBar, NavigationExperimental } from 'react-nati
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 
-/*import {
+import {
   Home
-} from './containers';*/
-
-import Home from './containers/Home/Home';
+} from './containers';
 
 const {
   popRoute,
@@ -48,13 +46,12 @@ class App extends Component {
 
   // Rendering scenes
   _renderScene(props) { // eslint-disable-line class-methods-use-this
-    /*switch (props.scene.route.key) {
+    switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashPage />;
       default :
         return <Home />;
-    }*/
-    return <Home />
+    }
   }
 
   render() {
