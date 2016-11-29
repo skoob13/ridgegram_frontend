@@ -3,7 +3,11 @@ import { View, BackAndroid, StatusBar, NavigationExperimental } from 'react-nati
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 
-import Index from './containers/index';
+/*import {
+  Home
+} from './containers';*/
+
+import Home from './containers/Home/Home';
 
 const {
   popRoute,
@@ -44,12 +48,13 @@ class App extends Component {
 
   // Rendering scenes
   _renderScene(props) { // eslint-disable-line class-methods-use-this
-    switch (props.scene.route.key) {
+    /*switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashPage />;
       default :
-        return <Index />;
-    }
+        return <Home />;
+    }*/
+    return <Home />
   }
 
   render() {
@@ -61,7 +66,7 @@ class App extends Component {
         />
         <NavigationCardStack
           navigationState={this.props.navigation}
-          renderOverlay={this._renderOverlay}
+          //renderOverlay={this._renderOverlay}
           renderScene={this._renderScene}
         />
       </View>
