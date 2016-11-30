@@ -3,6 +3,7 @@ import {
   View,
   Image,
   Dimensions,
+  Platform
 } from 'react-native';
 import styles from './Styles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -70,14 +71,17 @@ class Profile extends Component {
     } = this.props;
     const imageHeight = height * 0.35;
 
+    const activeButton = (
+      <ActionButton
+        buttonColor="#F66E96"
+        onPress={() => likeUser(id) }
+        icon={<Icon name="md-heart" size={24} color="white"/>}
+        ref="btn"
+      />
+    );
     const likeBtn = selfProfile || (
       <View style={[styles.btnContainer, {top: imageHeight + 50}]}>
-        <ActionButton
-          buttonColor="#F66E96"
-          onPress={() => likeUser(id) }
-          icon={<Icon name="md-heart" size={24} color="white"/>}
-          ref="btn"
-        />
+        {activeButton}
       </View>
     );
 
@@ -90,6 +94,9 @@ class Profile extends Component {
               <Text numberOfLines={1} h5 style={[styles.h4, {color: 'rgba(0,0,0,0.4)'}]}>
                 Likes
               </Text>
+              {
+                (Platform.OS === 'android' && !selfProfile) && activeButton
+              }
             </View>
           </Image>
         </View>
@@ -103,7 +110,7 @@ class Profile extends Component {
             <Text h6 style={styles.h6}>id: {id}</Text>
           </View>
         </View>
-        { likeBtn }
+        { Platform.OS === 'android' || likeBtn }
         {
           isFetching && <SplashComponent style={styles.overlayModal}/>
         }
