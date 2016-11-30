@@ -15,7 +15,7 @@ export default function configureStore(onCompletion: () => void):any {
   );
 
   const store = createStore(reducer, enhancer);
-  persistStore(store, { whitelist: ['auth'], storage: AsyncStorage }, onCompletion);
+  persistStore(store, { whitelist: ['auth'], blacklist: ['auth.error'], storage: AsyncStorage }, onCompletion);
 
   return store;
 }

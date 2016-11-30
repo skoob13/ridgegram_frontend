@@ -44,7 +44,10 @@ export function signIn(creds: Object):Action {
           } else {
             dispatch(receiveToken(result.body));
           }
-      }).catch(err => console.log("Error: ", err));
+      }).catch(err => {
+        dispatch(signInError(err));
+        console.log("Error: ", err);
+      });
   }
 }
 
@@ -60,7 +63,10 @@ export function signUp(user: Object):Action {
           } else {
             dispatch(receiveToken(result.body));
           }
-      }).catch(err => console.log("Error: ", err));
+      }).catch(err => {
+        dispatch(signInError(err));
+        console.log("Error: ", err);
+      });
   }
 }
 

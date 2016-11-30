@@ -76,7 +76,7 @@ export default function (state:State = initialState, action:Action): State {
 
   if (action.type === SIGN_OUT) {
     return {
-      initialState
+      ...initialState
     }
   }
 

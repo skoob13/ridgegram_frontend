@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { NavigationExperimental, View } from 'react-native';
+import { Alert, NavigationExperimental, View, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import {
   SignComponent,
   SignIn,
-  SignUp
+  SignUp,
+  SplashComponent,
 } from '../../components';
 import { signIn, signUp } from '../../redux/actions/auth';
 
@@ -74,25 +75,23 @@ class Sign extends Component {
     }
   }
 
-  _renderOverlay(props) {
-    if (this.props.isFetching) {
-      return (
-        <Header style={{height: 320, backgroundColor: 'black'}} {...props}/>
-      );
-    }
-  }
-
   render() {
     const {
       navigation,
+      isFetching,
+      isAuthenticated
     } = this.props;
 
     return (
-      <NavigationCardStack
-        navigationState={navigation}
-        renderScene={this._renderScene.bind(this)}
-        renderHeader={this._renderOverlay.bind(this)}
-      />
+      <View style={{flex: 1}}>
+        <NavigationCardStack
+          navigationState={navigation}
+          renderScene={this._renderScene.bind(this)}
+        />
+        <Modal visible={isFetching} transparent>
+          <SplashComponent />
+        </Modal>
+      </View>
     );
   }
 }
@@ -114,7 +113,7 @@ function mapStateToProps(state) {
 	return {
     isFetching: state.auth.isFetching,
     isAuthenticated: state.auth.isAuthenticated,
-		navigation: state.signNavigation
+		navigation: state.signNavigation,
 	};
 }
 export default connect(mapStateToProps, bindActions)(Sign);
