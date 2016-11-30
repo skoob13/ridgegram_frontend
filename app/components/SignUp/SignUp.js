@@ -3,7 +3,6 @@ import {
   Alert,
   View,
   Image,
-  ScrollView,
   TouchableWithoutFeedback,
   Picker
 } from 'react-native';

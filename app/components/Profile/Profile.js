@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Modal,
   View,
   Image,
-  TouchableOpacity,
   Dimensions,
 } from 'react-native';
 import styles from './Styles';
@@ -33,7 +31,7 @@ class Profile extends Component {
     selfProfile: PropTypes.bool,
     isFetching: PropTypes.bool,
     likeUser: PropTypes.func,
-    isFetchingLikes: PropTypes.func,
+    isFetchingLikes: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -53,7 +51,10 @@ class Profile extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    this.refs.btn.animateButton();
+    if (!this.props.selfProfile)
+    {
+      this.refs.btn.animateButton();
+    }
   }
 
   render() {

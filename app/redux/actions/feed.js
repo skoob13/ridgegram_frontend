@@ -10,6 +10,7 @@ export const GET_USER_FAILURE  = 'GET_USER_FAILURE';
 export const LIKE_USER_REQUEST = 'LIKE_USER_REQUEST';
 export const LIKE_USER_SUCCESS = 'LIKE_USER_SUCCESS';
 export const LIKE_USER_FAILURE = 'LIKE_USER_FAILURE';
+export const FLUSH_FEED = 'FLUSH_FEED';
 
 // Using endpoints here only for demonstration.
 // It's not necessary because /api/users endpoint gives full information
@@ -133,5 +134,11 @@ export function likeUser(id: String):Action {
         dispatch(failLike(err));
         console.log("Error: ", err);
       });
+  }
+}
+
+export function flushFeed():Action {
+  return {
+    type: FLUSH_FEED
   }
 }

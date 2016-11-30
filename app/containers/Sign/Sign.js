@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Alert, NavigationExperimental, View, Modal } from 'react-native';
+import { NavigationExperimental, View, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import {
@@ -25,6 +25,31 @@ const {
 } = NavigationExperimental;
 
 class Sign extends Component {
+  static propTypes = {
+    pushToRoute: PropTypes.func,
+    popToRoute: PropTypes.func,
+    signToAccount: PropTypes.func,
+    replaceRoute: PropTypes.func,
+    createAccount: PropTypes.func,
+    isFetching: PropTypes.bool,
+    isAuthenticated: PropTypes.bool,
+    navigation: React.PropTypes.shape({
+      key: React.PropTypes.string,
+      routes: React.PropTypes.array,
+    }),
+  }
+
+  static defaultProps = {
+    pushToRoute: () => {},
+    popToRoute: () => {},
+    signToAccount: () => {},
+    replaceRoute: () => {},
+    createAccount: () => {},
+    isFetching: false,
+    isAuthenticated: false,
+    navigation: {},
+  }
+
   constructor(props) {
     super(props);
     this.state = {

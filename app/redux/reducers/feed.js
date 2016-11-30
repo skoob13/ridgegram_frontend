@@ -8,7 +8,8 @@ import {
   GET_USER_FAILURE,
   LIKE_USER_REQUEST,
   LIKE_USER_SUCCESS,
-  LIKE_USER_FAILURE
+  LIKE_USER_FAILURE,
+  FLUSH_FEED
 } from '../actions/feed';
 
 export type State = {
@@ -19,6 +20,7 @@ export type State = {
   fetchedUser: Object,
   isFetchingUser: Boolean,
   isFetchingLikes: Boolean,
+  hasMoreUsers: Boolean,
 }
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   fetchedUser: {},
   isFetchingUser: false,
   isFetchingLikes: false,
+  hasMoreUsers: true,
 };
 
 export default function (state:State = initialState, action:Action): State {
@@ -53,7 +56,8 @@ export default function (state:State = initialState, action:Action): State {
     return {
       ...state,
       isFetching: false,
-      data: state.data.concat(action.result)
+      data: state.data.concat(action.result),
+      hasMoreUsers: action.result.length > 0,
     }
   }
 
@@ -111,6 +115,11 @@ export default function (state:State = initialState, action:Action): State {
       isFetchingLikes: false,
       error: action.error
     }
+  }
+
+  if (action.type === FLUSH_FEED)
+  {
+    return initialState;
   }
 
   return state;

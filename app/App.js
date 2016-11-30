@@ -15,7 +15,7 @@ import {
 } from './components';
 
 import { signOut } from './redux/actions/auth';
-import { likeUser } from './redux/actions/feed';
+import { likeUser, flushFeed } from './redux/actions/feed';
 
 const {
   popRoute,
@@ -34,7 +34,7 @@ class App extends Component {
     logOut: React.PropTypes.func,
     replaceRoutes: React.PropTypes.func,
     like: React.PropTypes.func,
-    isFetchingLikes: React.PropTypes.boolean,
+    isFetchingLikes: React.PropTypes.bool,
     tabsNavigation: React.PropTypes.shape({
       key: React.PropTypes.string,
       routes: React.PropTypes.array,
@@ -43,6 +43,7 @@ class App extends Component {
       key: React.PropTypes.string,
       routes: React.PropTypes.array,
     }),
+    flushFeed: React.PropTypes.func,
   }
 
   // Listening for back button on Android
@@ -86,6 +87,7 @@ class App extends Component {
       popRoute,
       replaceRoutes,
       logOut,
+      flushFeed
     } = this.props;
     const key = tabsNavigation.index === 0;
 
@@ -99,6 +101,7 @@ class App extends Component {
           logOut={() => {
             replaceRoutes();
             logOut();
+            flushFeed();
           }}
         />
       );
@@ -123,7 +126,8 @@ function bindAction(dispatch) {
     popRoute: () => dispatch(popRoute('global')),
     logOut: () => dispatch(signOut()),
     replaceRoutes: () => dispatch(replaceAt('home', { key: 'sign', index: 0 }, 'global')),
-    like: (id) => dispatch(likeUser(id))
+    like: (id) => dispatch(likeUser(id)),
+    flushFeed: () => dispatch(flushFeed())
   };
 }
 

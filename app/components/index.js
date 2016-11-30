@@ -3,7 +3,7 @@ import SignComponent from './SignComponent/SignComponent';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 import SplashComponent from './SplashComponent/SplashComponent';
-import NavToolbar from './Toolbar/NavToolbar';
+import NavToolbar from './NavToolbar/NavToolbar';
 
 export {
   NavToolbar,
