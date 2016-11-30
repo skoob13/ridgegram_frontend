@@ -9,16 +9,12 @@ export const SIGN_OUT = 'SIGN_OUT';
 function requestSignIn():Action {
   return {
     type: SIGNIN_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
   };
 }
 
 function receiveToken(result: Object):Action {
   return {
     type: SIGNIN_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
     result
   }
 }
@@ -26,8 +22,6 @@ function receiveToken(result: Object):Action {
 function signInError(error: Object):Action {
   return {
     type: SIGNIN_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
     error
   }
 }

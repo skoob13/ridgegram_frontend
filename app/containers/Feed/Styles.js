@@ -6,13 +6,8 @@ export default StyleSheet.create({
     flex: 1
   },
 
-  toolbar: {
-    backgroundColor: '#f8f8f8',
-  },
-
-  toolbarCentered: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  splashComponent: {
+    backgroundColor: 'transparent',
+    marginVertical: 16
   },
 });

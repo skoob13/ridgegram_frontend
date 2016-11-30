@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import {
+  Modal,
   View,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import styles from './Styles';
-import { Toolbar } from '../';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Text } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import config from '../../config';
+import { SplashComponent } from '../';
 
 const {
   width,
@@ -18,6 +19,7 @@ const {
 } = Dimensions.get('window');
 
 class Profile extends Component {
+
   static propTypes = {
     avatar: PropTypes.shape({
       description: PropTypes.string.isRequired,
@@ -27,13 +29,14 @@ class Profile extends Component {
     cellphone: PropTypes.string.isRequired,
     fullname: PropTypes.string.isRequired,
     gender: PropTypes.string.isRequired,
-    logoutPressed: PropTypes.func,
     id: PropTypes.string.isRequired,
     selfProfile: PropTypes.bool,
+    isFetching: PropTypes.bool,
+    likeUser: PropTypes.func,
+    isFetchingLikes: PropTypes.func,
   };
 
   static defaultProps = {
-    logoutPressed: () => {},
     avatar: {
       description: '',
       likesCount: 0,
@@ -44,7 +47,14 @@ class Profile extends Component {
     gender: '',
     id: '',
     selfProfile: '',
+    isFetching: false,
+    isFetchingLikes: false,
+    likeUser: () => {},
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.refs.btn.animateButton();
+  }
 
   render() {
     const {
@@ -52,30 +62,33 @@ class Profile extends Component {
       cellphone,
       fullname,
       gender,
-      logoutPressed,
       id,
-      selfProfile
+      selfProfile,
+      isFetching,
+      likeUser
     } = this.props;
-    const imageHeight = height * 0.45;
+    const imageHeight = height * 0.35;
+
+    const likeBtn = selfProfile || (
+      <View style={[styles.btnContainer, {top: imageHeight + 50}]}>
+        <ActionButton
+          buttonColor="#F66E96"
+          onPress={() => likeUser(id) }
+          icon={<Icon name="md-heart" size={24} color="white"/>}
+          ref="btn"
+        />
+      </View>
+    );
 
     return (
       <View style={styles.container}>
         <View style={{height: imageHeight}}>
           <Image style={styles.image} source={{uri: avatar.url}}>
             <View style={styles.overlay}>
-              <Toolbar>
-                <View style={styles.centered}>
-                  <TouchableOpacity onPress={() => logoutPressed()}>
-                    <Text h5 style={{color: 'white'}}>Sign out</Text>
-                  </TouchableOpacity>
-                </View>
-              </Toolbar>
-              <View style={styles.likesContainter}>
-                <Text numberOfLines={1} h5 style={styles.h4}>{avatar.likesCount}</Text>
-                <Text numberOfLines={1} h5 style={[styles.h4, {color: 'rgba(0,0,0,0.4)'}]}>
-                  Likes
-                </Text>
-              </View>
+              <Text numberOfLines={1} h5 style={styles.h4}>{avatar.likesCount}</Text>
+              <Text numberOfLines={1} h5 style={[styles.h4, {color: 'rgba(0,0,0,0.4)'}]}>
+                Likes
+              </Text>
             </View>
           </Image>
         </View>
@@ -89,13 +102,10 @@ class Profile extends Component {
             <Text h6 style={styles.h6}>id: {id}</Text>
           </View>
         </View>
-        <View style={[styles.btnContainer, {top: imageHeight + 50}]}>
-          <ActionButton
-            buttonColor="#F66E96"
-            onPress={() => {  }}
-            icon={<Icon name="md-heart" size={24} color="white"/>}
-          />
-        </View>
+        { likeBtn }
+        {
+          isFetching && <SplashComponent style={styles.overlayModal}/>
+        }
       </View>
     );
   }

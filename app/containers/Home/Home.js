@@ -5,7 +5,6 @@ import { actions as navigationActions } from 'react-native-navigation-redux-help
 import { Tabs, Tab } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles';
-import { signOut } from '../../redux/actions/auth';
 
 import { Profile } from '../../components';
 import { Feed } from '../';
@@ -23,25 +22,16 @@ class Home extends Component {
     }),
     user: React.PropTypes.object,
     jumpToTab: React.PropTypes.func,
-    logOut: React.PropTypes.func,
-    replaceRoutes: React.PropTypes.func,
   }
 
   static defaultProps = {
     navigation: {},
     user: {},
     jumpToTab: () => {},
-    logOut: () => {},
-    replaceRoutes: () => {},
   }
 
   componentWillUnmount() {
     this.props.jumpToTab(0, 'HomeTabs');
-  }
-
-  logOut() {
-    this.props.replaceRoutes();
-    this.props.logOut();
   }
 
   render() {
@@ -73,7 +63,7 @@ class Home extends Component {
           renderIcon={() => <Icon name='md-person' size={26} />}
           renderSelectedIcon={() => <Icon color="#F66E96" name='md-person' size={26} />}
           onPress={ () => jumpToTab(1, navigation.key) }>
-          <Profile {...user} logoutPressed={this.logOut.bind(this)} />
+          <Profile {...user} selfProfile />
         </Tab>
       </Tabs>
     );
@@ -83,8 +73,6 @@ class Home extends Component {
 function bindActions(dispatch) {
 	return {
 		jumpToTab: (i, key) => dispatch(jumpTo(i, key)),
-    logOut: () => dispatch(signOut()),
-    replaceRoutes: () => dispatch(replaceAt('home', { key: 'sign', index: 0 }, 'global')),
 	};
 }
 

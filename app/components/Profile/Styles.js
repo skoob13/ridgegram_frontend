@@ -30,11 +30,7 @@ export default StyleSheet.create({
 
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.15)'
-  },
-
-  likesContainter: {
-    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.15)',
     justifyContent: 'flex-end',
     padding: 20
   },
@@ -67,4 +63,12 @@ export default StyleSheet.create({
     top: 100,
     right: 36,
   },
+
+  overlayModal: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  }
 });
