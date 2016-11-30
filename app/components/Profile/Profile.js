@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
   View,
   Image,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   Dimensions
 } from 'react-native';
 import styles from './Styles';
@@ -10,6 +10,7 @@ import { Toolbar } from '../';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Text } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
+import config from '../../config';
 
 const {
   width,
@@ -33,10 +34,16 @@ class Profile extends Component {
 
   static defaultProps = {
     logoutPressed: () => {},
-    gender: 'male',
-    fullname: 'Georgiy Tarasov',
-    id: '84875gjfhji2848toilf',
-    cellphone: '+7 (982) 471-19-99',
+    avatar: {
+      description: '',
+      likesCount: 0,
+      url: config.defaultImage,
+    },
+    cellphone: '',
+    fullname: '',
+    gender: '',
+    id: '',
+    selfProfile: '',
   };
 
   render() {
@@ -49,7 +56,6 @@ class Profile extends Component {
       id,
       selfProfile
     } = this.props;
-
     const imageHeight = height * 0.45;
 
     return (
@@ -59,9 +65,9 @@ class Profile extends Component {
             <View style={styles.overlay}>
               <Toolbar>
                 <View style={styles.centered}>
-                  <TouchableWithoutFeedback onPress={() => logoutPressed()}>
-                    <Icon name="md-log-out" size={28} color="white" />
-                  </TouchableWithoutFeedback>
+                  <TouchableOpacity onPress={() => logoutPressed()}>
+                    <Text h5 style={{color: 'white'}}>Sign out</Text>
+                  </TouchableOpacity>
                 </View>
               </Toolbar>
               <View style={styles.likesContainter}>

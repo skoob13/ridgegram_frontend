@@ -4,8 +4,8 @@ import {
   SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
-} from '../actions/signIn';
-import { SIGN_OUT } from '../actions/signOut';
+  SIGN_OUT
+} from '../actions/auth';
 
 export type State = {
   token: String,

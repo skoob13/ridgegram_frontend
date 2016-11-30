@@ -18,6 +18,15 @@ function signInRequest(cellphone, password) {
   })
 }
 
+function signUpRequest(user) {
+  return api.post('/signup', {
+    body: {
+      ...user,
+    }
+  })
+}
+
 export {
-  signInRequest
+  signInRequest,
+  signUpRequest
 };

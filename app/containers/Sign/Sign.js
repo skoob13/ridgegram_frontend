@@ -7,11 +7,12 @@ import {
   SignIn,
   SignUp
 } from '../../components';
-import { signIn } from '../../redux/actions/signIn';
+import { signIn, signUp } from '../../redux/actions/auth';
 
 const {
   popRoute,
   pushRoute,
+  replaceAt
 } = actions;
 
 const {
@@ -32,11 +33,25 @@ class Sign extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.isAuthenticated) {
+      this.props.replaceRoute('sign', { key: 'home' }, 'global');
+    }
+  }
 
+  componentWillUnmount() {
+    const {
+      popToRoute,
+      navigation
+    } = this.props;
+
+    if (navigation.routes.length === 2) {
+      popToRoute('signNavigator');
+    }
   }
 
   _renderScene(props) {
     const {
+      createAccount,
       navigation,
       pushToRoute,
       signToAccount,
@@ -48,7 +63,9 @@ class Sign extends Component {
           signToAccount(cellphone, password);
         }}/>;
       case 'signUp':
-        return <SignUp />
+        return <SignUp signUp={(user) => {
+          createAccount(user);
+        }} />
       default :
         return <SignComponent
           signIn={() => pushToRoute({ key: 'signIn' }, navigation.key)}
@@ -83,16 +100,17 @@ class Sign extends Component {
 function bindActions(dispatch) {
 	return {
     pushToRoute: (i, key) => dispatch(pushRoute(i, key)),
-    popToRoute: (i, key) => dispatch(popRoute(i, key)),
+    popToRoute: (key) => dispatch(popRoute(key)),
     signToAccount: (cellphone, password) => dispatch(signIn({
       cellphone: cellphone,
       password: password,
     })),
+    replaceRoute: (at, to, key) => dispatch(replaceAt(at, to, key)),
+    createAccount: (user) => dispatch(signUp(user)),
 	};
 }
 
 function mapStateToProps(state) {
-  console.log(state);
 	return {
     isFetching: state.auth.isFetching,
     isAuthenticated: state.auth.isAuthenticated,

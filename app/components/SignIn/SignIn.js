@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, KeyboardAvoidingView } from 'react-native';
+import { Alert, View, KeyboardAvoidingView } from 'react-native';
 import { Button, Card, FormLabel, FormInput } from 'react-native-elements';
 import styles from './Styles';
 
@@ -60,7 +60,19 @@ class SignIn extends Component {
               raised
               fontWeight="700"
               icon={{color: 'white', name: 'md-log-in', type: 'ionicon'}}
-              onPress={() => signIn(cellphone, password)}
+              onPress={() => {
+                if (cellphone && password) {
+                  signIn(cellphone, password);
+                } else {
+                  Alert.alert(
+                    'Sign in error',
+                    'One of fields is empty!',
+                    [
+                      {text: 'OK', onPress: () => {}},
+                    ]
+                  );
+                }
+              }}
             />
         </Card>
       </KeyboardAvoidingView>

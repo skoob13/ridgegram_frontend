@@ -1,9 +1,10 @@
 import type { Action } from './types';
-import { signInRequest } from '../../helpers/api';
+import { signInRequest, signUpRequest } from '../../helpers/api';
 
 export const SIGNIN_REQUEST = 'SIGNIN_REQUEST';
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
+export const SIGN_OUT = 'SIGN_OUT';
 
 function requestSignIn():Action {
   return {
@@ -44,5 +45,27 @@ export function signIn(creds: Object):Action {
             dispatch(receiveToken(result.body));
           }
       }).catch(err => console.log("Error: ", err));
+  }
+}
+
+export function signUp(user: Object):Action {
+  return dispatch => {
+    dispatch(requestSignIn());
+
+    return signUpRequest(user)
+      .then(result => {
+          if (!result.body.token) {
+            dispatch(signInError(result));
+            return Promise.reject(result);
+          } else {
+            dispatch(receiveToken(result.body));
+          }
+      }).catch(err => console.log("Error: ", err));
+  }
+}
+
+export function signOut():Action {
+  return {
+    type: SIGN_OUT,
   }
 }

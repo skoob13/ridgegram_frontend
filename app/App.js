@@ -69,7 +69,6 @@ class App extends Component {
         />
         <NavigationCardStack
           navigationState={this.props.navigation}
-          //renderOverlay={this._renderOverlay}
           renderScene={this._renderScene}
         />
       </View>
