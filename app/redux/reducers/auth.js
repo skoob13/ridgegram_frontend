@@ -1,9 +1,11 @@
+import { REHYDRATE } from 'redux-persist/constants';
 import type { Action } from '../actions/types';
 import {
   SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
 } from '../actions/signIn';
+import { SIGN_OUT } from '../actions/signOut';
 
 export type State = {
   token: String,
@@ -18,10 +20,33 @@ const initialState = {
   user: {},
   isFetching: false,
   isAuthenticated: false,
+  isRehydrated: false,
   error: {},
 };
 
 export default function (state:State = initialState, action:Action): State {
+  if (action.type === REHYDRATE) {
+    // Checking if payload exists
+    const auth = action.payload.auth;
+    if (auth) {
+      return {
+        ...state,
+        isRehydrated: true,
+        isFetching: false,
+        isAuthenticated: auth.isAuthenticated,
+        token: auth.token,
+        user: auth.user,
+        error: {},
+      };
+    }
+
+    // Auth payload not loaded, so install initial state
+    return {
+      ...state,
+      isRehydrated: true,
+    }
+  }
+
   if (action.type === SIGNIN_REQUEST) {
     return {
       ...state,
@@ -47,6 +72,12 @@ export default function (state:State = initialState, action:Action): State {
       isFetching: false,
       error: action.error
     };
+  }
+
+  if (action.type === SIGN_OUT) {
+    return {
+      initialState
+    }
   }
 
   return state;

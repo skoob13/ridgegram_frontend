@@ -5,7 +5,8 @@ import { actions } from 'react-native-navigation-redux-helpers';
 
 import {
   Home,
-  Sign
+  Sign,
+  SplashScreen
 } from './containers';
 
 const {
@@ -49,7 +50,9 @@ class App extends Component {
   _renderScene(props) { // eslint-disable-line class-methods-use-this
     switch (props.scene.route.key) {
       case 'splashscreen':
-        return <SplashPage />;
+        return <SplashScreen />;
+      case 'home':
+        return <Home />;
       case 'profile':
         return <Profile {...this.props.selectedProfile} />
       default :

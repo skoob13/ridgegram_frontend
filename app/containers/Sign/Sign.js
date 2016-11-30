@@ -18,6 +18,10 @@ const {
   CardStack: NavigationCardStack,
 } = NavigationExperimental;
 
+const {
+  Header,
+} = NavigationExperimental;
+
 class Sign extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +60,7 @@ class Sign extends Component {
   _renderOverlay(props) {
     if (this.props.isFetching) {
       return (
-        <View style={{flex: 1, backgroundColor: 'black'}} />
+        <Header style={{height: 320, backgroundColor: 'black'}} {...props}/>
       );
     }
   }

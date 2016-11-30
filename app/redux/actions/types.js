@@ -5,6 +5,7 @@ export type Action =
     | { type: 'SIGNIN_REQUEST' }
     | { type: 'SIGNIN_SUCCESS', result: Object }
     | { type: 'SIGNIN_FAILURE', error: Object }
+    | { type: 'SIGN_OUT' }
 
 export type GetState = () => Object;
 export type PromiseAction = Promise<Action>;
