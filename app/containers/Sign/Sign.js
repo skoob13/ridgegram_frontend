@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { NavigationExperimental, View, Modal } from 'react-native';
+import { NavigationExperimental, View, Modal, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import {
@@ -113,9 +113,14 @@ class Sign extends Component {
           navigationState={navigation}
           renderScene={this._renderScene.bind(this)}
         />
-        <Modal visible={isFetching} transparent>
-          <SplashComponent />
-        </Modal>
+        {
+          Platform.OS === 'android' || (
+            <Modal visible={isFetching} transparent>
+              <SplashComponent />
+            </Modal>
+          )
+        }
+
       </View>
     );
   }
