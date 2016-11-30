@@ -101,7 +101,7 @@ class Feed extends Component {
     return (
       <ListItem
         roundAvatar
-        /*avatar={{ uri: rowData.avatar.url }}*/
+        avatar={{ uri: rowData.avatar.url }}
         onPress={() => {
           const {
             fetchUser,
