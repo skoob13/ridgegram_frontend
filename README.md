@@ -20,8 +20,7 @@
 * `react-native-vector-icons`
 
 ## Demo
-![alt text][sign]
-
+![alt text][sign] ![alt text][signIn] ![alt text][signUp] ![alt text][feed] ![alt text][self] ![alt text][profile]
 [sign]: /media/sign.png "Sign screen"
 [signIn]: /media/signIn.png "Sign In screen"
 [signUp]: /media/signUp.png "Sign Up screen"
