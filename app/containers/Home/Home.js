@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions as navigationActions } from 'react-native-navigation-redux-helpers';
-import { Tabs, Tab } from 'react-native-elements'
+import { Tabs, Tab } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles';
 
@@ -9,7 +9,7 @@ import { Profile } from '../../components';
 import { Feed } from '../';
 
 const {
-  jumpTo
+  jumpTo,
 } = navigationActions;
 
 class Home extends Component {
@@ -36,7 +36,7 @@ class Home extends Component {
     const {
       jumpToTab,
       navigation,
-      user
+      user,
     } = this.props;
 
     const selectedTab = navigation.index === 0 ? 'feed' : 'profile';
@@ -48,9 +48,10 @@ class Home extends Component {
           title={'Feed'}
           titleStyle={styles.titleStyle}
           selectedTitleStyle={styles.titleStyle}
-          renderIcon={() => <Icon name='md-list' size={26} />}
-          renderSelectedIcon={() => <Icon color="#F66E96" name='md-list' size={26} />}
-          onPress={ () => jumpToTab(0, navigation.key) }>
+          renderIcon={() => <Icon name="md-list" size={26} />}
+          renderSelectedIcon={() => <Icon color="#F66E96" name="md-list" size={26} />}
+          onPress={() => jumpToTab(0, navigation.key)}
+        >
           <Feed />
         </Tab>
         <Tab
@@ -58,9 +59,10 @@ class Home extends Component {
           title={'Profile'}
           titleStyle={styles.titleStyle}
           selectedTitleStyle={styles.titleStyle}
-          renderIcon={() => <Icon name='md-person' size={26} />}
-          renderSelectedIcon={() => <Icon color="#F66E96" name='md-person' size={26} />}
-          onPress={ () => jumpToTab(1, navigation.key) }>
+          renderIcon={() => <Icon name="md-person" size={26} />}
+          renderSelectedIcon={() => <Icon color="#F66E96" name="md-person" size={26} />}
+          onPress={() => jumpToTab(1, navigation.key)}
+        >
           <Profile {...user} selfProfile />
         </Tab>
       </Tabs>
@@ -69,16 +71,16 @@ class Home extends Component {
 }
 
 function bindActions(dispatch) {
-	return {
-		jumpToTab: (i, key) => dispatch(jumpTo(i, key)),
-	};
+  return {
+    jumpToTab: (i, key) => dispatch(jumpTo(i, key)),
+  };
 }
 
 function mapStateToProps(state) {
-	return {
-		navigation: state.tabReducer,
+  return {
+    navigation: state.tabReducer,
     user: state.auth.user,
-	};
+  };
 }
 
 export default connect(mapStateToProps, bindActions)(Home);

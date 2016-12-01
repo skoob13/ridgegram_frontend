@@ -11,5 +11,5 @@ export {
   SignComponent,
   SignIn,
   SignUp,
-  SplashComponent
-}
+  SplashComponent,
+};

@@ -4,24 +4,24 @@ import config from '../config';
 const options = {
   baseURI: config.apiURI,
   headers: {
-    "Accept": "application/json",
-    "Content-Type": "application/json"
-  }
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
 };
 const api = new Frisbee(options);
 
 function jwtFrisbee(token) {
   const opt = options;
-  opt.headers['Authorization'] = "JWT " + token;
+  opt.headers.Authorization = `JWT ${token}`;
   return new Frisbee(opt);
 }
 
 function signInRequest(cellphone, password) {
   return api.post('/signin', {
     body: {
-      cellphone: cellphone,
-      password: password,
-    }
+      cellphone,
+      password,
+    },
   });
 }
 
@@ -29,30 +29,30 @@ function signUpRequest(user) {
   return api.post('/signup', {
     body: {
       ...user,
-    }
+    },
   });
 }
 
 function getUsersRequest(token, offset = 0) {
-  const api = jwtFrisbee(token);
-  return api.get('/users', {
+  const _api = jwtFrisbee(token);
+  return _api.get('/users', {
     body: {
-      offset: offset,
-    }
+      offset,
+    },
   });
 }
 
 function getUserRequest(token, id) {
-  const api = jwtFrisbee(token);
-  return api.get('/user/' + id);
+  const _api = jwtFrisbee(token);
+  return _api.get(`/user/${id}`);
 }
 
 function likeRequest(token, id) {
-  const api = jwtFrisbee(token);
-  return api.post('/user/like', {
+  const _api = jwtFrisbee(token);
+  return _api.post('/user/like', {
     body: {
-      id: id,
-    }
+      id,
+    },
   });
 }
 
@@ -61,5 +61,5 @@ export {
   signUpRequest,
   getUserRequest,
   getUsersRequest,
-  likeRequest
+  likeRequest,
 };

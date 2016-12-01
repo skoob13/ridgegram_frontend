@@ -31,8 +31,8 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#EEEEEE', justifyContent: 'center', alignItems: 'center', padding: 20}}>
-        <Text h4 style={{marginBottom: 8}}>Rehydrating state...</Text>
+      <View style={{ flex: 1, backgroundColor: '#EEEEEE', justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+        <Text h4 style={{ marginBottom: 8 }}>Rehydrating state...</Text>
         <ActivityIndicator />
       </View>
     );
@@ -40,16 +40,16 @@ class SplashScreen extends Component {
 }
 
 function bindActions(dispatch) {
-	return {
+  return {
     replaceRoute: (at, to, key) => dispatch(replaceAt(at, to, key)),
-	};
+  };
 }
 
 function mapStateToProps(state) {
-	return {
+  return {
     isRehydrated: state.auth.isRehydrated,
     isAuthenticated: state.auth.isAuthenticated,
-	};
+  };
 }
 
 export default connect(mapStateToProps, bindActions)(SplashScreen);

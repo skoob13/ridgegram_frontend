@@ -15,57 +15,55 @@ function requestSignIn():Action {
 function receiveToken(result: Object):Action {
   return {
     type: SIGNIN_SUCCESS,
-    result
-  }
+    result,
+  };
 }
 
 function signInError(error: Object):Action {
   return {
     type: SIGNIN_FAILURE,
-    error
-  }
+    error,
+  };
 }
 
 export function signIn(creds: Object):Action {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(requestSignIn());
 
     return signInRequest(creds.cellphone, creds.password)
-      .then(result => {
-          if (!result.body.token) {
-            dispatch(signInError(result));
-            return Promise.reject(result);
-          } else {
-            dispatch(receiveToken(result.body));
-          }
-      }).catch(err => {
+      .then((result) => {
+        if (!result.body.token) {
+          dispatch(signInError(result));
+          return Promise.reject(result);
+        }
+        dispatch(receiveToken(result.body));
+      }).catch((err) => {
         dispatch(signInError(err));
-        //console.log("Error: ", err);
+        // console.log("Error: ", err);
       });
-  }
+  };
 }
 
 export function signUp(user: Object):Action {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(requestSignIn());
 
     return signUpRequest(user)
-      .then(result => {
-          if (!result.body.token) {
-            dispatch(signInError(result));
-            return Promise.reject(result);
-          } else {
-            dispatch(receiveToken(result.body));
-          }
-      }).catch(err => {
+      .then((result) => {
+        if (!result.body.token) {
+          dispatch(signInError(result));
+          return Promise.reject(result);
+        }
+        dispatch(receiveToken(result.body));
+      }).catch((err) => {
         dispatch(signInError(err));
-        //console.log("Error: ", err);
+        // console.log("Error: ", err);
       });
-  }
+  };
 }
 
 export function signOut():Action {
   return {
     type: SIGN_OUT,
-  }
+  };
 }

@@ -7,5 +7,5 @@ export {
   Feed,
   Home,
   Sign,
-  SplashScreen
-}
+  SplashScreen,
+};

@@ -13,7 +13,7 @@ import { signIn, signUp } from '../../redux/actions/auth';
 const {
   popRoute,
   pushRoute,
-  replaceAt
+  replaceAt,
 } = actions;
 
 const {
@@ -63,7 +63,7 @@ class Sign extends Component {
   componentWillUnmount() {
     const {
       popToRoute,
-      navigation
+      navigation,
     } = this.props;
 
     if (navigation.routes.length === 2) {
@@ -71,7 +71,7 @@ class Sign extends Component {
     }
   }
 
-  _renderScene(props) {
+  _renderScene = (props) => {
     const {
       createAccount,
       navigation,
@@ -81,32 +81,36 @@ class Sign extends Component {
 
     switch (props.scene.route.key) {
       case 'signIn':
-        return <SignIn signIn={(cellphone, password) => {
-          signToAccount(cellphone, password);
-        }}/>;
+        return (<SignIn
+          signIn={(cellphone, password) => {
+            signToAccount(cellphone, password);
+          }}
+        />);
       case 'signUp':
-        return <SignUp signUp={(user) => {
-          createAccount(user);
-        }} />
+        return (<SignUp
+          signUp={(user) => {
+            createAccount(user);
+          }}
+        />);
       default :
-        return <SignComponent
+        return (<SignComponent
           signIn={() => pushToRoute({ key: 'signIn' }, navigation.key)}
           signUp={() => pushToRoute({ key: 'signUp' }, navigation.key)}
-        />;
+        />);
     }
   }
 
   render() {
     const {
       navigation,
-      isFetching
+      isFetching,
     } = this.props;
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <NavigationCardStack
           navigationState={navigation}
-          renderScene={this._renderScene.bind(this)}
+          renderScene={this._renderScene}
         />
         {
           Platform.OS === 'android' || (
@@ -122,23 +126,23 @@ class Sign extends Component {
 }
 
 function bindActions(dispatch) {
-	return {
+  return {
     pushToRoute: (i, key) => dispatch(pushRoute(i, key)),
-    popToRoute: (key) => dispatch(popRoute(key)),
+    popToRoute: key => dispatch(popRoute(key)),
     signToAccount: (cellphone, password) => dispatch(signIn({
-      cellphone: cellphone,
-      password: password,
+      cellphone,
+      password,
     })),
     replaceRoute: (at, to, key) => dispatch(replaceAt(at, to, key)),
-    createAccount: (user) => dispatch(signUp(user)),
-	};
+    createAccount: user => dispatch(signUp(user)),
+  };
 }
 
 function mapStateToProps(state) {
-	return {
+  return {
     isFetching: state.auth.isFetching,
     isAuthenticated: state.auth.isAuthenticated,
-		navigation: state.signNavigation,
-	};
+    navigation: state.signNavigation,
+  };
 }
 export default connect(mapStateToProps, bindActions)(Sign);

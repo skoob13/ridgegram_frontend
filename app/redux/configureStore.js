@@ -1,5 +1,5 @@
 import { persistStore } from 'redux-persist';
-import ReduxThunk from 'redux-thunk'
+import ReduxThunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import devTools from 'remote-redux-devtools';

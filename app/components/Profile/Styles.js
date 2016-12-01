@@ -4,12 +4,12 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    position: 'relative'
+    position: 'relative',
   },
 
   centered: {
     justifyContent: 'center',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
 
   descriptionContainer: {
@@ -25,14 +25,14 @@ export default StyleSheet.create({
 
   idContainer: {
     justifyContent: 'flex-end',
-    paddingTop: 8
+    paddingTop: 8,
   },
 
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.15)',
     justifyContent: 'flex-end',
-    padding: 20
+    padding: 20,
   },
 
   h3: {
@@ -51,11 +51,11 @@ export default StyleSheet.create({
   },
 
   h4: {
-    fontWeight: '600'
+    fontWeight: '600',
   },
 
   h6: {
-    fontWeight: '600'
+    fontWeight: '600',
   },
 
   btnContainer: {
@@ -70,5 +70,5 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-  }
+  },
 });

@@ -28,52 +28,52 @@ class SignIn extends Component {
 
     const {
       cellphone,
-      password
+      password,
     } = this.state;
 
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Card
           title="Sign In"
-          >
-            <FormLabel>Cellphone</FormLabel>
-            <FormInput
-              onChangeText={ (text)=> this.setState({cellphone: text}) }
-              autoCorrect={false}
-              keyboardType="phone-pad"
-              maxLength={32}
-              autoCapitalize="none"
-              returnKeyType="next"
-            />
-            <FormLabel>Password</FormLabel>
-            <FormInput
-              onChangeText={ (text)=> this.setState({password: text}) }
-              autoCorrect={false}
-              maxLength={32}
-              autoCapitalize="none"
-              returnKeyType="next"
-              secureTextEntry
-            />
-            <Button
-              title="Sign in"
-              buttonStyle={styles.button}
-              raised
-              fontWeight="700"
-              icon={{color: 'white', name: 'md-log-in', type: 'ionicon'}}
-              onPress={() => {
-                if (cellphone && password) {
-                  signIn(cellphone, password);
-                } else {
-                  Alert.alert(
+        >
+          <FormLabel>Cellphone</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ cellphone: text })}
+            autoCorrect={false}
+            keyboardType="phone-pad"
+            maxLength={32}
+            autoCapitalize="none"
+            returnKeyType="next"
+          />
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ password: text })}
+            autoCorrect={false}
+            maxLength={32}
+            autoCapitalize="none"
+            returnKeyType="next"
+            secureTextEntry
+          />
+          <Button
+            title="Sign in"
+            buttonStyle={styles.button}
+            raised
+            fontWeight="700"
+            icon={{ color: 'white', name: 'md-log-in', type: 'ionicon' }}
+            onPress={() => {
+              if (cellphone && password) {
+                signIn(cellphone, password);
+              } else {
+                Alert.alert(
                     'Sign in error',
                     'One of fields is empty!',
-                    [
-                      {text: 'OK', onPress: () => {}},
-                    ]
+                  [
+                      { text: 'OK', onPress: () => {} },
+                  ],
                   );
-                }
-              }}
-            />
+              }
+            }}
+          />
         </Card>
       </KeyboardAvoidingView>
     );

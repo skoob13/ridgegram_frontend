@@ -3,17 +3,17 @@ import {
   View,
   Image,
   Dimensions,
-  Platform
+  Platform,
 } from 'react-native';
-import styles from './Styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Text } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
+import styles from './Styles';
 import config from '../../config';
 import { SplashComponent } from '../';
 
 const {
-  height
+  height,
 } = Dimensions.get('window');
 
 class Profile extends Component {
@@ -31,7 +31,6 @@ class Profile extends Component {
     selfProfile: PropTypes.bool,
     isFetching: PropTypes.bool,
     likeUser: PropTypes.func,
-    isFetchingLikes: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -46,15 +45,17 @@ class Profile extends Component {
     id: '',
     selfProfile: '',
     isFetching: false,
-    isFetchingLikes: false,
     likeUser: () => {},
   };
 
   componentWillReceiveProps() {
-    if (!this.props.selfProfile)
-    {
-      this.refs.btn.animateButton();
+    if (!this.props.selfProfile) {
+      this._btn.animateButton();
     }
+  }
+
+  mapRef = (c) => {
+    this._btn = c;
   }
 
   render() {
@@ -66,31 +67,31 @@ class Profile extends Component {
       id,
       selfProfile,
       isFetching,
-      likeUser
+      likeUser,
     } = this.props;
     const imageHeight = height * 0.35;
 
     const activeButton = (
       <ActionButton
         buttonColor="#F66E96"
-        onPress={() => likeUser(id) }
-        icon={<Icon name="md-heart" size={24} color="white"/>}
-        ref="btn"
+        onPress={() => likeUser(id)}
+        icon={<Icon name="md-heart" size={24} color="white" />}
+        ref={c => this.mapRef(c)}
       />
     );
     const likeBtn = selfProfile || (
-      <View style={[styles.btnContainer, {top: imageHeight + 50}]}>
+      <View style={[styles.btnContainer, { top: imageHeight + 50 }]}>
         {activeButton}
       </View>
     );
 
     return (
       <View style={styles.container}>
-        <View style={{height: imageHeight}}>
-          <Image style={styles.image} source={{uri: avatar.url}}>
+        <View style={{ height: imageHeight }}>
+          <Image style={styles.image} source={{ uri: avatar.url }}>
             <View style={styles.overlay}>
               <Text numberOfLines={1} h5 style={styles.h4}>{avatar.likesCount}</Text>
-              <Text numberOfLines={1} h5 style={[styles.h4, {color: 'rgba(0,0,0,0.4)'}]}>
+              <Text numberOfLines={1} h5 style={[styles.h4, { color: 'rgba(0,0,0,0.4)' }]}>
                 Likes
               </Text>
               {
@@ -102,7 +103,7 @@ class Profile extends Component {
         <View style={styles.descriptionContainer}>
           <Text numberOfLines={2} h3 style={styles.h3}>{fullname}, {gender}</Text>
           <Text numberOfLines={1} h5 style={styles.h5pink}>Phone: {cellphone}</Text>
-          <View style={{flex: 1, overflow: 'hidden'}}>
+          <View style={{ flex: 1, overflow: 'hidden' }}>
             <Text h5 style={styles.h5}>{avatar.description}</Text>
           </View>
           <View style={styles.idContainer}>
@@ -111,7 +112,7 @@ class Profile extends Component {
         </View>
         { Platform.OS === 'android' || likeBtn }
         {
-          isFetching && <SplashComponent style={styles.overlayModal}/>
+          isFetching && <SplashComponent style={styles.overlayModal} />
         }
       </View>
     );

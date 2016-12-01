@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, BackAndroid, NavigationExperimental } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
@@ -6,20 +6,20 @@ import { actions } from 'react-native-navigation-redux-helpers';
 import {
   Home,
   Sign,
-  SplashScreen
+  SplashScreen,
 } from './containers';
 
 import {
   Profile,
-  NavToolbar
+  NavToolbar,
 } from './components';
 
 import { signOut } from './redux/actions/auth';
-import { likeUser, flushFeed } from './redux/actions/feed';
+import { likeUser, flushFeed as flushHomeFeed } from './redux/actions/feed';
 
 const {
-  popRoute,
-  replaceAt
+  popRoute: popNavRoute,
+  replaceAt: replaceRoute,
 } = actions;
 
 const {
@@ -29,22 +29,32 @@ const {
 class App extends Component {
 
   static propTypes = {
-    popRoute: React.PropTypes.func,
-    selectedProfile: React.PropTypes.object,
-    logOut: React.PropTypes.func,
-    replaceRoutes: React.PropTypes.func,
-    like: React.PropTypes.func,
-    isFetchingLikes: React.PropTypes.bool,
-    isFetchingUser: React.PropTypes.bool,
-    tabsNavigation: React.PropTypes.shape({
-      key: React.PropTypes.string,
-      routes: React.PropTypes.array,
+    popRoute: PropTypes.func,
+    selectedProfile: PropTypes.shape({
+      avatar: PropTypes.shape({
+        description: PropTypes.string,
+        likesCount: PropTypes.number,
+        url: PropTypes.string,
+      }),
+      cellphone: PropTypes.string,
+      fullname: PropTypes.string,
+      gender: PropTypes.string,
+      id: PropTypes.string,
     }),
-    navigation: React.PropTypes.shape({
-      key: React.PropTypes.string,
-      routes: React.PropTypes.array,
+    logOut: PropTypes.func,
+    replaceRoutes: PropTypes.func,
+    like: PropTypes.func,
+    isFetchingLikes: PropTypes.bool,
+    isFetchingUser: PropTypes.bool,
+    tabsNavigation: PropTypes.shape({
+      key: PropTypes.string,
+      routes: PropTypes.array,
     }),
-    flushFeed: React.PropTypes.func,
+    navigation: PropTypes.shape({
+      key: PropTypes.string,
+      routes: PropTypes.array,
+    }),
+    flushFeed: PropTypes.func,
   }
 
   // Listening for back button on Android
@@ -62,38 +72,37 @@ class App extends Component {
     });
   }
 
-  // Rendering scenes
-  _renderScene(props) { // eslint-disable-line class-methods-use-this
+  /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }]*/
+  _renderScene = (props) => {
     switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashScreen />;
       case 'home':
         return <Home />;
       case 'profile':
-        return <Profile
+        return (<Profile
           {...this.props.selectedProfile}
           selfProfile={false}
           isFetching={this.props.isFetchingUser}
           isFetchingLikes={this.props.isFetchingLikes}
           likeUser={this.props.like}
-        />
+        />);
       default :
         return <Sign />;
     }
   }
 
-  _renderHeader(sceneProps) {
+  _renderHeader = (sceneProps) => {
     const {
       tabsNavigation,
       popRoute,
       replaceRoutes,
       logOut,
-      flushFeed
+      flushFeed,
     } = this.props;
     const key = tabsNavigation.index === 0;
 
-    if (sceneProps.navigationState.routes[0].key === 'home')
-    {
+    if (sceneProps.navigationState.routes[0].key === 'home') {
       return (
         <NavToolbar
           popEnabled={key && sceneProps.navigationState.routes.length > 1}
@@ -111,11 +120,11 @@ class App extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <NavigationCardStack
           navigationState={this.props.navigation}
-          renderScene={this._renderScene.bind(this)}
-          renderHeader={this._renderHeader.bind(this)}
+          renderScene={this._renderScene}
+          renderHeader={this._renderHeader}
         />
       </View>
     );
@@ -124,11 +133,11 @@ class App extends Component {
 
 function bindAction(dispatch) {
   return {
-    popRoute: () => dispatch(popRoute('global')),
+    popRoute: () => dispatch(popNavRoute('global')),
     logOut: () => dispatch(signOut()),
-    replaceRoutes: () => dispatch(replaceAt('home', { key: 'sign', index: 0 }, 'global')),
-    like: (id) => dispatch(likeUser(id)),
-    flushFeed: () => dispatch(flushFeed())
+    replaceRoutes: () => dispatch(replaceRoute('home', { key: 'sign', index: 0 }, 'global')),
+    like: id => dispatch(likeUser(id)),
+    flushFeed: () => dispatch(flushHomeFeed()),
   };
 }
 
@@ -137,7 +146,7 @@ const mapStateToProps = state => ({
   tabsNavigation: state.tabReducer,
   selectedProfile: state.feed.fetchedUser,
   isFetchingUser: state.feed.isFetchingUser,
-  isFetchingLikes: state.feed.isFetchingLikes
+  isFetchingLikes: state.feed.isFetchingLikes,
 });
 
 export default connect(mapStateToProps, bindAction)(App);

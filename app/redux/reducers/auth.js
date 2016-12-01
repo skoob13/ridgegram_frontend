@@ -4,7 +4,7 @@ import {
   SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
-  SIGN_OUT
+  SIGN_OUT,
 } from '../actions/auth';
 
 export type State = {
@@ -44,7 +44,7 @@ export default function (state:State = initialState, action:Action): State {
     return {
       ...state,
       isRehydrated: true,
-    }
+    };
   }
 
   if (action.type === SIGNIN_REQUEST) {
@@ -61,7 +61,7 @@ export default function (state:State = initialState, action:Action): State {
       isAuthenticated: true,
       isFetching: false,
       token: action.result.token,
-      user: action.result.user
+      user: action.result.user,
     };
   }
 
@@ -70,14 +70,14 @@ export default function (state:State = initialState, action:Action): State {
       ...state,
       isAuthenticated: false,
       isFetching: false,
-      error: action.error
+      error: action.error,
     };
   }
 
   if (action.type === SIGN_OUT) {
     return {
-      ...initialState
-    }
+      ...initialState,
+    };
   }
 
   return state;

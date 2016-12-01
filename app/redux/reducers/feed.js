@@ -9,7 +9,7 @@ import {
   LIKE_USER_REQUEST,
   LIKE_USER_SUCCESS,
   LIKE_USER_FAILURE,
-  FLUSH_FEED
+  FLUSH_FEED,
 } from '../actions/feed';
 
 export type State = {
@@ -40,7 +40,7 @@ export default function (state:State = initialState, action:Action): State {
       ...state,
       offset: action.offset,
       isFetching: true,
-    }
+    };
   }
 
   if (action.type === GET_FEED_SUCCESS) {
@@ -49,8 +49,8 @@ export default function (state:State = initialState, action:Action): State {
       return {
         ...state,
         isFetching: false,
-        data: action.result
-      }
+        data: action.result,
+      };
     }
 
     return {
@@ -58,7 +58,7 @@ export default function (state:State = initialState, action:Action): State {
       isFetching: false,
       data: state.data.concat(action.result),
       hasMoreUsers: action.result.length > 0,
-    }
+    };
   }
 
   if (action.type === GET_FEED_FAILURE) {
@@ -66,37 +66,37 @@ export default function (state:State = initialState, action:Action): State {
       ...state,
       error: action.error,
       isFetching: false,
-    }
+    };
   }
 
   if (action.type === GET_USER_REQUEST) {
     return {
       ...state,
       isFetchingUser: true,
-    }
+    };
   }
 
   if (action.type === GET_USER_SUCCESS) {
     return {
       ...state,
       isFetchingUser: false,
-      fetchedUser: action.result
-    }
+      fetchedUser: action.result,
+    };
   }
 
   if (action.type === GET_USER_FAILURE) {
     return {
       ...state,
       isFetchingUser: false,
-      error: action.error
-    }
+      error: action.error,
+    };
   }
 
   if (action.type === LIKE_USER_REQUEST) {
     return {
       ...state,
       isFetchingLikes: true,
-    }
+    };
   }
 
   if (action.type === LIKE_USER_SUCCESS) {
@@ -106,19 +106,18 @@ export default function (state:State = initialState, action:Action): State {
       ...state,
       isFetchingLikes: false,
       fetchedUser: user,
-    }
+    };
   }
 
   if (action.type === LIKE_USER_FAILURE) {
     return {
       ...state,
       isFetchingLikes: false,
-      error: action.error
-    }
+      error: action.error,
+    };
   }
 
-  if (action.type === FLUSH_FEED)
-  {
+  if (action.type === FLUSH_FEED) {
     return initialState;
   }
 
