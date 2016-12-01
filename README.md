@@ -18,3 +18,13 @@
 * `react-native-image-picker` for uploading images from gallery
 * `react-native-keyboard-aware-scroll-view` replacement for React-Native `KeyboardAvoidingView` (ScrollView issues)
 * `react-native-vector-icons`
+
+## Demo
+![alt text][sign]
+
+[sign]: /media/sign.png "Sign screen"
+[signIn]: /media/signIn.png "Sign In screen"
+[signUp]: /media/signUp.png "Sign Up screen"
+[feed]: /media/feed.png "Feed screen"
+[self]: /media/self.png "Self profile screen"
+[profile]: /media/profile.png "User's profile screen"
