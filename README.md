@@ -20,16 +20,9 @@
 * `react-native-vector-icons`
 
 ## Demo
-![alt text][sign]
-![alt text][signIn]
-![alt text][signUp]
-![alt text][feed]
-![alt text][self]
-![alt text][profile]
-
-[sign]: /media/sign.png width=150 "Sign screen"
-[signIn]: /media/signIn.png width=150 "Sign In screen"
-[signUp]: /media/signUp.png width=150 "Sign Up screen"
-[feed]: /media/feed.png width=150 "Feed screen"
-[self]: /media/self.png width=150 "Self profile screen"
-[profile]: /media/profile.png width=150 "User's profile screen"
+<img src="media/sign.png" width="150">
+<img src="media/signin.png" width="150">
+<img src="media/signup.png" width="150">
+<img src="media/feed.png" width="150">
+<img src="media/self.png" width="150">
+<img src="media/profile.png" width="150">
