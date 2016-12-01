@@ -20,10 +20,6 @@ const {
   CardStack: NavigationCardStack,
 } = NavigationExperimental;
 
-const {
-  Header,
-} = NavigationExperimental;
-
 class Sign extends Component {
   static propTypes = {
     pushToRoute: PropTypes.func,
@@ -103,8 +99,7 @@ class Sign extends Component {
   render() {
     const {
       navigation,
-      isFetching,
-      isAuthenticated
+      isFetching
     } = this.props;
 
     return (

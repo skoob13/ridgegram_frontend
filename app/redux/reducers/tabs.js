@@ -9,4 +9,4 @@ const tabs = {
   index: 0
 };
 
-module.exports = tabReducer(tabs);
+export default tabReducer(tabs);

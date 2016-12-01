@@ -51,7 +51,7 @@ export function getFeed(offset: Number):Action {
           }
       }).catch(err => {
         dispatch(failFeed(err));
-        console.log("Error: ", err);
+        //console.log("Error: ", err);
       });
   }
 }
@@ -92,7 +92,7 @@ export function getUser(id: String):Action {
           }
       }).catch(err => {
         dispatch(failUser(err));
-        console.log("Error: ", err);
+        //console.log("Error: ", err);
       });
   }
 }
@@ -132,7 +132,7 @@ export function likeUser(id: String):Action {
           }
       }).catch(err => {
         dispatch(failLike(err));
-        console.log("Error: ", err);
+        //console.log("Error: ", err);
       });
   }
 }

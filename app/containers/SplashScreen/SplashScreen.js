@@ -10,13 +10,13 @@ const {
 
 class SplashScreen extends Component {
   static propTypes = {
-    replaceNavRoute: PropTypes.func.isRequired,
+    replaceRoute: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     isRehydrated: PropTypes.bool,
   }
 
   static defaultProps = {
-    replaceNavRoute: () => {},
+    replaceRoute: () => {},
     isAuthenticated: false,
     isRehydrated: false,
   }

@@ -11,4 +11,4 @@ const initialState = {
   ],
 };
 
-module.exports = cardStackReducer(initialState);
+export default cardStackReducer(initialState);

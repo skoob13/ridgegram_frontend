@@ -35,6 +35,7 @@ class App extends Component {
     replaceRoutes: React.PropTypes.func,
     like: React.PropTypes.func,
     isFetchingLikes: React.PropTypes.bool,
+    isFetchingUser: React.PropTypes.bool,
     tabsNavigation: React.PropTypes.shape({
       key: React.PropTypes.string,
       routes: React.PropTypes.array,

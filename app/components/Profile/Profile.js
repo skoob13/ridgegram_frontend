@@ -13,7 +13,6 @@ import config from '../../config';
 import { SplashComponent } from '../';
 
 const {
-  width,
   height
 } = Dimensions.get('window');
 
@@ -51,7 +50,7 @@ class Profile extends Component {
     likeUser: () => {},
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     if (!this.props.selfProfile)
     {
       this.refs.btn.animateButton();

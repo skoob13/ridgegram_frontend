@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Alert, View, KeyboardAvoidingView } from 'react-native';
+import { Alert, KeyboardAvoidingView } from 'react-native';
 import { Button, Card, FormLabel, FormInput } from 'react-native-elements';
 import styles from './Styles';
 

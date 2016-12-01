@@ -49,7 +49,7 @@ class SignUp extends Component {
 
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel || response.error) {
-        console.log('Image picker error!');
+        // console.log('Image picker error!');
       }
       else {
         const source = 'data:image/jpeg;base64,' + response.data;

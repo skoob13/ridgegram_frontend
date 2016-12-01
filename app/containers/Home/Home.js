@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { actions as navigationActions } from 'react-native-navigation-redux-helpers';
 import { Tabs, Tab } from 'react-native-elements'
@@ -10,8 +9,7 @@ import { Profile } from '../../components';
 import { Feed } from '../';
 
 const {
-  jumpTo,
-  replaceAt
+  jumpTo
 } = navigationActions;
 
 class Home extends Component {

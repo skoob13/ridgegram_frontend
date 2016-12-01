@@ -20,10 +20,6 @@ class Feed extends Component {
     popToRoute: PropTypes.func,
     fetch: PropTypes.func,
     fetchUser: PropTypes.func,
-    navigation: React.PropTypes.shape({
-      key: React.PropTypes.string,
-      routes: React.PropTypes.array,
-    }),
     feed: PropTypes.array,
     isFetching: PropTypes.bool,
     isFetchingUser: PropTypes.bool,
@@ -61,12 +57,6 @@ class Feed extends Component {
   }
 
   render() {
-    const {
-      pushToRoute,
-      popToRoute,
-      navigation,
-    } = this.props;
-
     return (
       <View style={styles.container}>
         <ListView
@@ -142,7 +132,6 @@ function bindActions(dispatch) {
 
 function mapStateToProps(state) {
 	return {
-		navigation: state.tabReducer,
     feed: state.feed.data,
     isFetching: state.feed.isFetching,
     isFetchingUser: state.feed.isFetchingUser,

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { View, StyleSheet, TouchableOpacity, Platform, PixelRatio } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -39,10 +39,10 @@ NavToolbar.defaultProps = {
   logOut: () => {},
 }
 
-NavToolbar.defaultProps = {
-  popEnabled: PropTypes.boolean,
+NavToolbar.propTypes = {
+  popEnabled: PropTypes.bool,
   popRoute: PropTypes.func,
-  logOutEnabled: PropTypes.boolean,
+  logOutEnabled: PropTypes.bool,
   logOut: PropTypes.func,
 }
 

@@ -40,7 +40,7 @@ export function signIn(creds: Object):Action {
           }
       }).catch(err => {
         dispatch(signInError(err));
-        console.log("Error: ", err);
+        //console.log("Error: ", err);
       });
   }
 }
@@ -59,7 +59,7 @@ export function signUp(user: Object):Action {
           }
       }).catch(err => {
         dispatch(signInError(err));
-        console.log("Error: ", err);
+        //console.log("Error: ", err);
       });
   }
 }
